@@ -8,18 +8,59 @@ body{max-width:62rem;margin:auto;padding:clamp(1rem,4vw,3rem)}
 h1{line-height:1.15;font-size:clamp(2rem,5vw,3.5rem);max-width:17ch}
 main{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,20rem),1fr));gap:1rem}
 section{background:#203738;border:1px solid #496667;border-radius:.75rem;padding:1.25rem}
-button{font:inherit;font-weight:600;padding:.5rem 1rem;margin:0 .5rem .5rem 0;border-radius:.4rem;border:0;cursor:pointer}
-button:enabled{background:#98e8df;color:#102626} label{display:block} pre{line-height:1.4} a{color:#98e8df}
+* { box-sizing: border-box; }
+:root { color-scheme: dark; }
+body > p { max-width: 70ch; }
+.controls {
+  margin: 1.5rem 0;
+  padding: clamp(1rem, 3vw, 1.5rem);
+  border: 1px solid #496667;
+  border-radius: .85rem;
+  background: #1b3031;
+}
+.settings { display: flex; flex-wrap: wrap; align-items: end; gap: .8rem 2rem; }
+.example { display: grid; gap: .35rem; flex: 1 1 20rem; min-width: 0; max-width: 27rem; }
+.example span { font-size: .875rem; font-weight: 650; color: #b9d3ce; }
+select, button { font: inherit; min-height: 2.75rem; border-radius: .5rem; }
+select {
+  width: 100%; padding: .45rem .75rem; border: 1px solid #65827f;
+  background: #102425; color: #effaf8; text-overflow: ellipsis;
+}
+.race { display: flex; align-items: center; gap: .65rem; min-height: 2.75rem; cursor: pointer; }
+.race input { flex: none; margin: 0; width: 1.125rem; height: 1.125rem; accent-color: #98e8df; }
+.actions {
+  display: flex; flex-wrap: wrap; align-items: center; gap: .6rem;
+  border-top: 1px solid #395352; margin-top: 1rem; padding-top: 1rem;
+}
+button { font-weight: 650; padding: .45rem 1rem; cursor: pointer; }
+#start { border: 1px solid transparent; background: #98e8df; color: #102626; }
+#toggle { border: 1px solid #73918d; background: transparent; color: #d5ebe7; }
+#start:disabled, #toggle:disabled { background: #263a3a; border-color: #455d5a; color: #abc0bc; cursor: default; }
+button:enabled:hover { filter: brightness(1.12); }
+:focus-visible { outline: 3px solid #ffd78e; outline-offset: 3px; }
+#status { margin: 0 0 0 auto; font-size: .9rem; color: #c4d9d5; font-variant-numeric: tabular-nums; }
+pre { line-height: 1.4; }
+a { color: #98e8df; }
+@media (max-width: 38rem) {
+  .settings { display: grid; }
+  #status { width: 100%; margin: .25rem 0 0; }
+}
 </style>
 <h1>Resume an interrupted LLM stream</h1>
 <p>Start a response, disconnect, and watch the generator keep writing. Reconnect to replay the missing words. This simulation runs entirely in your tab.</p>
-<label>Example <select id="mode">
+<div class="controls">
+<div class="settings">
+<label class="example"><span>Example</span><select id="mode">
 <option value="recover">Recover every word</option>
 <option value="skip">Missing word: advance the cursor too soon</option>
 </select></label>
+<label class="race"><input id="race" type="checkbox" checked> Disconnect before applying chunk 5</label>
+</div>
+<div class="actions">
 <button id="start">Start generation</button><button id="toggle" disabled>Disconnect</button>
-<label><input id="race" type="checkbox" checked> Disconnect before applying chunk 5</label>
 <p role="status" id="status">Ready</p>
+</div>
+</div>
 <main><section><h2>Browser transcript</h2><p id="answer"></p></section>
 <section><h2>Generator log</h2><pre id="log"></pre></section></main>
 <p><a href="https://github.com/rdeprey/resumable-llm-stream">Run the HTTP and SQLite version or explore the tests</a></p>
