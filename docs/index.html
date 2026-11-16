@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Resume an interrupted LLM stream</title>
+<style>
+:root{color-scheme:light dark;font:1rem/1.6 system-ui;background:#132526;color:#e9f5f4}
+body{max-width:62rem;margin:auto;padding:clamp(1rem,4vw,3rem)}
+h1{line-height:1.15;font-size:clamp(2rem,5vw,3.5rem);max-width:17ch}
+main{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,20rem),1fr));gap:1rem}
+section{background:#203738;border:1px solid #496667;border-radius:.75rem;padding:1.25rem}
+button{font:inherit;font-weight:600;padding:.5rem 1rem;margin:0 .5rem .5rem 0;border-radius:.4rem;border:0;cursor:pointer}
+button:enabled{background:#98e8df;color:#102626} label{display:block} pre{line-height:1.4} a{color:#98e8df}
+</style>
+<h1>Resume an interrupted LLM stream</h1>
+<p>Start a response, disconnect, and watch the generator keep writing. Reconnect to replay the missing words. This simulation runs entirely in your tab.</p>
+<button id="start">Start generation</button><button id="toggle" disabled>Disconnect</button>
+<label><input id="race" type="checkbox" checked> Disconnect before applying chunk 5</label>
+<p role="status" id="status">Ready</p>
+<main><section><h2>Browser transcript</h2><p id="answer"></p></section>
+<section><h2>Generator log</h2><pre id="log"></pre></section></main>
+<p><a href="https://github.com/rdeprey/resumable-llm-stream">Run the HTTP and SQLite version or explore the tests</a></p>
+<script type="module" src="./demo.js"></script>
+</html>
