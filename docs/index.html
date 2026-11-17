@@ -47,14 +47,10 @@ a { color: #98e8df; }
 }
 </style>
 <h1>Resume an interrupted LLM stream</h1>
-<p>Start a response, disconnect, and watch the generator keep writing. Reconnect to replay the missing words. This simulation runs entirely in your tab.</p>
+<p>Start a response. The transcript pauses automatically at chunk 5 while the generator keeps writing. Reconnect to see which words the browser recovers. This simulation runs entirely in your tab.</p>
 <div class="controls">
 <div class="settings">
-<label class="example"><span>Example</span><select id="mode">
-<option value="recover">Recover every word</option>
-<option value="skip">Missing word: advance the cursor too soon</option>
-</select></label>
-<label class="race"><input id="race" type="checkbox" checked> Disconnect before applying chunk 5</label>
+<label class="race"><input id="bug" type="checkbox"> Simulate a bug: advance the cursor too soon</label>
 </div>
 <div class="actions">
 <button id="start">Start generation</button><button id="toggle" disabled>Disconnect</button>

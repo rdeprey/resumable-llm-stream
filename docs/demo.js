@@ -15,7 +15,7 @@ function replay() {
     if (!connected) return;
     if (event.seq === 5 && interruptAtFive) {
       interruptAtFive = false;
-      if (el('mode').value === 'skip') state = { ...state, cursor: event.seq };
+      if (el('bug').checked) state = { ...state, cursor: event.seq };
       setConnection(false);
       return;
     }
@@ -23,8 +23,7 @@ function replay() {
     el('answer').textContent = state.text;
     el('status').textContent = state.status + ' · resume cursor ' + state.cursor;
     if (event.kind === 'done') {
-      el('mode').disabled = false;
-      el('race').disabled = el('mode').value === 'skip';
+      el('bug').disabled = false;
       el('start').disabled = false;
       el('toggle').disabled = true;
     }
@@ -36,16 +35,9 @@ el('toggle').onclick = () => {
   if (connected) replay();
 };
 
-el('mode').onchange = () => {
-  const missingWord = el('mode').value === 'skip';
-  if (missingWord) el('race').checked = true;
-  el('race').disabled = missingWord;
-};
-
 el('start').onclick = () => {
-  interruptAtFive = el('race').checked;
-  el('mode').disabled = true;
-  el('race').disabled = true;
+  interruptAtFive = true;
+  el('bug').disabled = true;
   events = [];
   state = empty();
   el('answer').textContent = '';
