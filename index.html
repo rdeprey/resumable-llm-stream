@@ -3,8 +3,8 @@
 <style>body{font:1rem/1.5 system-ui;max-width:60rem;margin:auto;padding:2rem}main{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr));gap:2rem}pre{white-space:pre-wrap}button{padding:.5rem}</style>
 <h1>Interrupt a streaming answer</h1>
 <button id="start">Start generation</button> <button id="toggle" disabled>Disconnect</button>
-<label><input id="race" type="checkbox"> Disconnect before applying chunk 5</label>
-<p id="status" role="status">Ready</p><main><section><h2>Browser transcript</h2><p id="answer"></p></section><section><h2>Saved on the server</h2><pre id="log"></pre></section></main>
+<label><input id="race" type="checkbox"> Disconnect before applying event 5</label>
+<p id="status" role="status">Ready</p><main><section><h2>Browser transcript</h2><p id="answer"></p></section><section><h2>Server event log</h2><pre id="log"></pre></section></main>
 <script type="module">
 import { empty, apply, observe } from './client.mjs';
 const el = id => document.getElementById(id);
@@ -53,7 +53,7 @@ el('start').onclick = async () => {
       const current = id;
       const rows = await (await fetch('/log?id=' + current)).json();
       if (current !== id) return;
-      el('log').textContent = rows.map(e => e.seq + '  ' + e.kind + '  ' + e.text).join('\n');
+      el('log').textContent = rows.map(e => 'Event ' + e.seq + '  ' + e.kind + '  ' + e.text).join('\n');
       if (['done','error'].includes(rows.at(-1)?.kind)) clearInterval(timer);
     }, 250);
     connect();

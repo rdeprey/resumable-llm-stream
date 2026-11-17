@@ -47,7 +47,7 @@ a { color: #98e8df; }
 }
 </style>
 <h1>Resume an interrupted LLM stream</h1>
-<p>Start a response. The transcript pauses automatically at chunk 5 while the generator keeps writing. Reconnect to see which words the browser recovers. This simulation runs entirely in your tab.</p>
+<p>Start a response. Each numbered event in the log records a chunk of answer text or marks the end of the response. The transcript pauses before adding the chunk from event 5 while the generator keeps writing. Reconnect to see which words the browser recovers. This simulation runs entirely in your tab.</p>
 <div class="controls">
 <div class="settings">
 <label class="race"><input id="bug" type="checkbox"> Simulate a bug: advance the cursor too soon</label>
@@ -58,7 +58,7 @@ a { color: #98e8df; }
 </div>
 </div>
 <main><section><h2>Browser transcript</h2><p id="answer"></p></section>
-<section><h2>Generator log</h2><pre id="log"></pre></section></main>
+<section><h2>Event log</h2><pre id="log"></pre></section></main>
 <p><a href="https://github.com/rdeprey/resumable-llm-stream">Run the HTTP and SQLite version or explore the tests</a></p>
 <script type="module" src="./demo.js"></script>
 </html>

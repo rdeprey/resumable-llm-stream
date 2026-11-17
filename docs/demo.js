@@ -49,7 +49,7 @@ el('start').onclick = () => {
     const index = events.length;
     const event = { seq: index + 1, kind: index < words.length ? 'chunk' : 'done', text: words[index] || '' };
     events.push(event);
-    el('log').textContent += event.seq + '  ' + event.kind + '  ' + event.text + '\n';
+    el('log').textContent += 'Event ' + event.seq + '  ' + event.kind + '  ' + event.text + '\n';
     if (event.kind === 'done') clearInterval(timer);
     replay();
   }, 800);

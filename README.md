@@ -1,6 +1,6 @@
 # Resume an interrupted LLM stream
 
-[Try the browser demo](https://rdeprey.github.io/resumable-llm-stream/). Start a generation and let it disconnect at chunk 5. Watch the generator log advance while the transcript pauses. Reconnect to replay the missing text.
+[Try the browser demo](https://rdeprey.github.io/resumable-llm-stream/). Start a generation and let it disconnect before adding the chunk from event 5. Watch the event log advance while the transcript pauses. Reconnect to replay the missing text.
 
 GitHub Pages runs a simulation in memory. The local edition uses an HTTP streaming connection and saves each chunk in SQLite. Both use the same event reducer and a deterministic answer, so you can compare the recovered text without a model API key.
 
